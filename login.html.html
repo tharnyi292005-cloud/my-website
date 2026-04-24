@@ -1,0 +1,56 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; background-color: #fff5f7; }
+        
+        button { padding: 15px 30px; font-size: 20px; cursor: pointer; background: #ff4081; color: white; border: none; border-radius: 10px; transition: 0.3s; }
+        button:active { transform: scale(0.9); }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            animation: floatUp 2s ease-out forwards;
+            pointer-events: none; /* Mouse နဲ့ တိုက်မိတာမျိုး မဖြစ်အောင် */
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0); opacity: 1; }
+            50% { transform: translateY(-200px) scale(1); opacity: 1; }
+            100% { transform: translateY(-400px) scale(0); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <button id="clickMe">Click Here! 💖</button>
+
+    <script>
+        // Heart emoji လေးတွေကို စုထားတဲ့ အိတ် (Array)
+        const heartsArray = ['🤍', '💓', '💝', '🧡', '🩵', '🩷', '🩶', '💘', '💖'];
+
+        document.getElementById('clickMe').addEventListener('click', function() {
+            // (၁၅) ခုလောက် ထွက်လာမယ်
+            for (let i = 0; i < 15; i++) {
+                let heart = document.createElement('div');
+                
+                // Array ထဲကနေ ကျပန်း (Random) ရွေးယူမယ်
+                heart.innerHTML = heartsArray[Math.floor(Math.random() * heartsArray.length)];
+                heart.className = 'heart';
+                
+                // နေရာအစုံမှာ ပေါ်လာအောင်
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.top = (window.innerHeight - 50) + 'px';
+                
+                document.body.appendChild(heart);
+
+                // animation ပြီးရင် ဖျက်ပစ်မယ်
+                setTimeout(() => {
+                    heart.remove();
+                }, 2000);
+            }
+        });
+    </script>
+
+</body>
+</html>
